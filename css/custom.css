@@ -23,3 +23,25 @@
 #nav .site-name {
   display: none !important;
 }
+
+#nav {
+  background: transparent !important; 
+  border-bottom: none !important;      
+  box-shadow: none !important;        
+  height: 100px !important;            
+}
+
+#nav #blog-info .nav-site-title .site-icon {
+  height: 80px !important;            
+  width: auto !important;
+  max-height: none !important;
+  margin-top: 10px !important;        
+  display: inline-block !important;
+  transition: all 0.3s ease !important;
+  
+  filter: drop-shadow(0 0 8px rgba(142, 68, 173, 0.6)) !important; 
+}
+
+#nav.show {
+  background: transparent !important;
+}
