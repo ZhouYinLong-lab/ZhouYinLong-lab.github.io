@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap');
 
+html, body, #web_container {
+  background-color: #0b0b0d !important;
+  background-image: none !important;
+}
+
+#site-title, #site-subtitle {
+  font-family: 'Zhi Mang Xing', cursive !important;
+}
 #site-title {
   display: block !important;
   font-family: 'Zhi Mang Xing', cursive !important;
@@ -32,16 +40,60 @@
 }
 
 #nav #blog-info .nav-site-title .site-icon {
-  height: 80px !important;            
-  width: auto !important;
-  max-height: none !important;
-  margin-top: 10px !important;        
-  display: inline-block !important;
-  transition: all 0.3s ease !important;
+  height: 100px !important;
+  filter: 
+    brightness(2.0) 
+    contrast(1.2) 
+    drop-shadow(0 0 8px rgba(162, 89, 255, 0.9)) !important; 
   
-  filter: drop-shadow(0 0 8px rgba(142, 68, 173, 0.6)) !important; 
+  transition: all 0.3s ease !important;
+}
+
+#nav #blog-info .nav-site-title .site-icon:hover {
+  filter: brightness(2.0) drop-shadow(0 0 15px rgba(255, 255, 255, 0.9)) !important;
+  transform: scale(1.05); 
 }
 
 #nav.show {
   background: transparent !important;
 }
+
+#page-header.full_page:before {
+  background: none !important;
+}
+
+#page-header.full_page:after {
+  background: none !important;
+}
+
+#web_container, #body-wrap, #page-header {
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+#aside-sidebar .card-info #card-info-btn {
+  background-color: #44ad65 !important; 
+  color: #fff !important;
+}
+
+#aside-sidebar .card-info #card-info-btn:hover {
+  background-color: #44ad65 !important; 
+}
+
+
+#aside-sidebar .card-announcement .item-headline i:before {
+  content: "\f06c" !important; 
+  font-family: "Font Awesome 5 Free" !important;
+  font-weight: 900 !important;
+}
+
+#aside-sidebar .card-announcement .item-headline i:before {
+  content: "\f3eb" !important; 
+}
+
+
+#aside-sidebar .card-announcement .item-headline i {
+  color: #59ffa9 !important; 
+  animation: none !important; 
+}
+
