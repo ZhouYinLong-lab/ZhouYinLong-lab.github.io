@@ -1,0 +1,21 @@
+/* 1. 引入智莽行书字体 */
+@import url('https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap');
+
+/* 2. 首页大标题位置与字体 */
+#site-title {
+  font-family: 'Zhi Mang Xing', cursive !important;
+  font-size: 4.5rem !important; 
+  /* 调整位置：让标题下移，不遮挡背景树的中心 */
+  padding-top: 100px !important; 
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.8) !important;
+}
+
+/* 3. 隐藏左上角你不想看到的跳转选项（站点名称） */
+#nav .site-name {
+  display: none !important;
+}
+
+/* 4. 如果你想让顶部的导航栏背景变透明，更沉浸 */
+#nav {
+  background: transparent !important;
+}
