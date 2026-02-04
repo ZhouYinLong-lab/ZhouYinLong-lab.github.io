@@ -146,53 +146,25 @@
 
 <style>
 /* =========================================
-   A. 修复 Logo：锁定左上角导航栏 (#nav)
-   ========================================= */
-/* 针对左上角的图片 Logo */
-#nav .site-icon {
-  /* 强力去色 + 提亮 = 纯白 */
-  filter: grayscale(100%) brightness(1000%) !important; 
-  /* 降低透明度，做成水印感 */
-  opacity: 0.5 !important;
-  /* 去掉可能的阴影 */
-  box-shadow: none !important;
-  /* 增加磨砂感 */
-  backdrop-filter: blur(2px);
-}
-
-/* 如果旁边还有文字（比如南京大学的字），也一起变白 */
-#nav .site-name {
-  color: rgba(255,255,255,0.6) !important;
-  text-shadow: none !important;
-}
-
-/* 鼠标放上去变清晰 */
-#nav .site-icon:hover, #nav .site-name:hover {
-  opacity: 1 !important;
-  filter: grayscale(0%) brightness(100%) !important; /* 悬停时恢复原色，会有惊艳的交互感 */
-}
-
-/* =========================================
-   B. 优化标题与印章：让它们更紧凑
+   1. 标题与印章：寒柳别苑 + 柳印
    ========================================= */
 #site-title {
   font-family: 'Zhi Mang Xing', cursive !important;
-  font-size: 4.8rem !important; /* 再大一点 */
+  font-size: 4.8rem !important;
   font-weight: 400 !important;
   color: #f0f0f0 !important;
-  letter-spacing: 0px !important; /* 稍微紧凑一点，更有书法感 */
+  letter-spacing: 2px !important;
   text-shadow: 3px 3px 5px rgba(0,0,0,0.5);
   
-  /* 关键：使用 Flex 布局让印章自动对齐 */
+  /* 布局设置 */
   display: flex !important;
   align-items: center; 
-  justify-content: flex-end; /* 靠右对齐 */
-  
+  justify-content: flex-end;
   margin: 0 !important;
-  padding-bottom: 10px; /* 给底部留点呼吸空间 */
+  padding-bottom: 5px;
 }
 
-/* 修复后的印章 */
+/* 红色印章 - 微调位置 */
 #site-title::after {
   content: '柳印';
   font-size: 0.9rem;
@@ -200,36 +172,36 @@
   color: rgba(255, 255, 255, 0.9);
   background-color: #b22222; /* 丹砂红 */
   
-  /* 调整印章位置 */
-  margin-left: 15px !important; /* 稍微拉近一点 */
+  margin-left: 15px !important; 
   padding: 4px 6px;
   border-radius: 3px;
   line-height: 1;
   
-  /* 稍微旋转一点，模拟盖章的不完美感 */
+  /* 稍微旋转，模拟盖章感 */
   transform: rotate(8deg); 
   box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
   opacity: 0.9;
-  
-  /* 强制不换行 */
   white-space: nowrap;
 }
 
 /* =========================================
-   C. 布局修正
+   2. 布局修正 (右下角定位)
    ========================================= */
 #page-header #site-info {
-  bottom: 50px !important; /* 稍微提上来一点，别贴底太死 */
-  right: 8% !important;    /* 稍微往左挪一点，构图更稳 */
+  bottom: 50px !important;
+  right: 8% !important;
+  left: auto !important;
+  width: auto !important;
+  text-align: right !important;
 }
 
-/* 遮罩 */
+/* 背景遮罩 */
 #page-header::before {
   background: linear-gradient(to top left, rgba(0,0,0,0.4) 0%, transparent 60%) !important;
 }
 
 /* =========================================
-   D. 必须保留的动画代码 (原封不动)
+   3. 开场动画 (完全保留)
    ========================================= */
 #cyber-loader {
   position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -244,33 +216,16 @@
 }
 .curtain-orange {
   background-color: #050505;
-  background-image: 
-    repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(162, 89, 255, 0.1) 20px, rgba(162, 89, 255, 0.1) 40px),
-    linear-gradient(180deg, transparent 0%, transparent 30%, #a259ff 30%, #a259ff 30.5%, transparent 30.5%, transparent 60%, #a259ff 60%, #a259ff 62%, transparent 62%);
-  clip-path: polygon(0 0, 100% 0, 0 100%);
-  z-index: 2;
-  filter: drop-shadow(0 0 5px rgba(162, 89, 255, 0.5));
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(162, 89, 255, 0.1) 20px, rgba(162, 89, 255, 0.1) 40px), linear-gradient(180deg, transparent 0%, transparent 30%, #a259ff 30%, #a259ff 30.5%, transparent 30.5%, transparent 60%, #a259ff 60%, #a259ff 62%, transparent 62%);
+  clip-path: polygon(0 0, 100% 0, 0 100%); z-index: 2; filter: drop-shadow(0 0 5px rgba(162, 89, 255, 0.5));
 }
 .curtain-green {
   background-color: #050505;
-  background-image: 
-    repeating-linear-gradient(-45deg, transparent, transparent 15px, rgba(0, 255, 127, 0.1) 15px, rgba(0, 255, 127, 0.1) 30px),
-    linear-gradient(90deg, transparent 0%, transparent 10%, #00ff7f 10%, #00ff7f 10.5%, transparent 10.5%, transparent 80%, #00ff7f 80%, #00ff7f 81%, transparent 81%);
-  clip-path: polygon(100% 0, 100% 100%, 0 100%);
-  z-index: 1;
-  transition-delay: 0.15s;
-  filter: drop-shadow(0 0 5px rgba(0, 255, 127, 0.5));
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 15px, rgba(0, 255, 127, 0.1) 15px, rgba(0, 255, 127, 0.1) 30px), linear-gradient(90deg, transparent 0%, transparent 10%, #00ff7f 10%, #00ff7f 10.5%, transparent 10.5%, transparent 80%, #00ff7f 80%, #00ff7f 81%, transparent 81%);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%); z-index: 1; transition-delay: 0.15s; filter: drop-shadow(0 0 5px rgba(0, 255, 127, 0.5));
 }
 .cyber-text {
-  position: relative; z-index: 10;
-  font-family: 'Courier New', monospace;
-  font-size: 2.5rem; font-weight: 900; color: #fff;
-  background: #000; padding: 10px 25px; letter-spacing: 4px;
-  border: 1px solid rgba(255,255,255,0.3);
-  box-shadow: 0 0 15px rgba(162, 89, 255, 0.6);
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 2px 2px 0px #a259ff;
-  transition: all 0.5s ease;
-  animation: cyber-pulse 2s infinite;
+  position: relative; z-index: 10; font-family: 'Courier New', monospace; font-size: 2.5rem; font-weight: 900; color: #fff; background: #000; padding: 10px 25px; letter-spacing: 4px; border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 0 15px rgba(162, 89, 255, 0.6); text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 2px 2px 0px #a259ff; transition: all 0.5s ease; animation: cyber-pulse 2s infinite;
 }
 @keyframes cyber-pulse {
   0%, 100% { box-shadow: 0 0 15px rgba(162, 89, 255, 0.6); border-color: rgba(255,255,255,0.3); }
@@ -281,7 +236,7 @@ body.loaded .curtain-orange { transform: translate3d(-105%, -105%, 0); }
 body.loaded .curtain-green { transform: translate3d(105%, 105%, 0); }
 body.loaded .cyber-text { opacity: 0; transform: scale(0.9); filter: blur(10px); }
 </style>
-<meta name="generator" content="Hexo 8.1.1"></head><body><div class="bg-animation" id="web_bg" style="background: [object Object];"></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/logo.png" alt="Logo"></a></span><div id="menus"></div></nav><div id="page-site-info"><h1 id="site-title">诗歌</h1></div></header><main class="layout" id="content-inner"><div id="tag"><div class="article-sort-title">标签 - 诗歌</div><div class="article-sort"><div class="article-sort-item year">2026</div><div class="article-sort-item"><a class="article-sort-item-img" href="/2026/02/02/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E9%A6%96%E8%AF%97/" title="【每日诗语】兰波：感觉"><img src="/img/RIMBAUD%E3%80%8AFeeling%E3%80%8B.png" alt="【每日诗语】兰波：感觉" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-02-02T14:30:00.000Z" title="发表于 2026-02-02 22:30:00">2026-02-02</time></div><a class="article-sort-item-title" href="/2026/02/02/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E9%A6%96%E8%AF%97/" title="【每日诗语】兰波：感觉">【每日诗语】兰波：感觉</a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">周胤龙</div><div class="author-info-description">南大智能科学 | 诗歌 | 艾尔登法环</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ZhouYinLong-lab"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>柳下语</span></div><div class="announcement_content">虽然你是一个响当当的笨蛋,但这荒唐的热闹,也只有你能演得这样灿烂。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/02/02/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E9%A6%96%E8%AF%97/" title="【每日诗语】兰波：感觉"><img src="/img/RIMBAUD%E3%80%8AFeeling%E3%80%8B.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【每日诗语】兰波：感觉"/></a><div class="content"><a class="title" href="/2026/02/02/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E9%A6%96%E8%AF%97/" title="【每日诗语】兰波：感觉">【每日诗语】兰波：感觉</a><time datetime="2026-02-02T14:30:00.000Z" title="发表于 2026-02-02 22:30:00">2026-02-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/02/hello-world/" title="Hello World">Hello World</a><time datetime="2026-02-02T12:58:33.318Z" title="发表于 2026-02-02 20:58:33">2026-02-02</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+<meta name="generator" content="Hexo 8.1.1"></head><body><div class="bg-animation" id="web_bg" style="background: [object Object];"></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"></a></span><div id="menus"></div></nav><div id="page-site-info"><h1 id="site-title">诗歌</h1></div></header><main class="layout" id="content-inner"><div id="tag"><div class="article-sort-title">标签 - 诗歌</div><div class="article-sort"><div class="article-sort-item year">2026</div><div class="article-sort-item"><a class="article-sort-item-img" href="/2026/02/02/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E9%A6%96%E8%AF%97/" title="【每日诗语】兰波：感觉"><img src="/img/RIMBAUD%E3%80%8AFeeling%E3%80%8B.png" alt="【每日诗语】兰波：感觉" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2026-02-02T14:30:00.000Z" title="发表于 2026-02-02 22:30:00">2026-02-02</time></div><a class="article-sort-item-title" href="/2026/02/02/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E9%A6%96%E8%AF%97/" title="【每日诗语】兰波：感觉">【每日诗语】兰波：感觉</a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">周胤龙</div><div class="author-info-description">南大智能科学 | 诗歌 | 艾尔登法环</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ZhouYinLong-lab"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>柳下语</span></div><div class="announcement_content">虽然你是一个响当当的笨蛋,但这荒唐的热闹,也只有你能演得这样灿烂。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/02/02/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E9%A6%96%E8%AF%97/" title="【每日诗语】兰波：感觉"><img src="/img/RIMBAUD%E3%80%8AFeeling%E3%80%8B.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【每日诗语】兰波：感觉"/></a><div class="content"><a class="title" href="/2026/02/02/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E9%A6%96%E8%AF%97/" title="【每日诗语】兰波：感觉">【每日诗语】兰波：感觉</a><time datetime="2026-02-02T14:30:00.000Z" title="发表于 2026-02-02 22:30:00">2026-02-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/02/hello-world/" title="Hello World">Hello World</a><time datetime="2026-02-02T12:58:33.318Z" title="发表于 2026-02-02 20:58:33">2026-02-02</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>分类</span>
             
@@ -307,7 +262,7 @@ body.loaded .cyber-text { opacity: 0; transform: scale(0.9); filter: blur(10px);
         </li>
       
     </ul>
-  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">2</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-02-04T14:04:06.416Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 周胤龙</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><div id="cyber-loader">
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">2</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-02-04T14:08:49.232Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 周胤龙</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><div id="cyber-loader">
   <div class="cyber-curtain curtain-green"></div>
   <div class="cyber-curtain curtain-orange"></div>
   <div class="cyber-text">SYSTEM_INITIALIZING_</div>
