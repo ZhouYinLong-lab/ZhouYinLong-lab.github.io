@@ -155,95 +155,90 @@
 
 <style>
 /* =========================================
-   A. Logo 方案：纯白磨砂水印 (Glassmorphism)
+   A. 修复 Logo：锁定左上角导航栏 (#nav)
    ========================================= */
-#blog-info .site-icon {
-  /* 去色 + 极度提亮 = 纯白 */
-  filter: grayscale(100%) brightness(500%) !important;
-  /* 降低透明度，像云层上的水印 */
-  opacity: 0.4 !important;
-  /* 去掉边框背景 */
-  background: transparent !important;
+/* 针对左上角的图片 Logo */
+#nav .site-icon {
+  /* 强力去色 + 提亮 = 纯白 */
+  filter: grayscale(100%) brightness(1000%) !important; 
+  /* 降低透明度，做成水印感 */
+  opacity: 0.5 !important;
+  /* 去掉可能的阴影 */
   box-shadow: none !important;
-  border: none !important;
-  /* 磨砂感 */
+  /* 增加磨砂感 */
   backdrop-filter: blur(2px);
-  transition: all 0.6s ease;
 }
 
-#blog-info .site-icon:hover {
-  opacity: 0.9 !important;
-  transform: scale(1.1); 
+/* 如果旁边还有文字（比如南京大学的字），也一起变白 */
+#nav .site-name {
+  color: rgba(255,255,255,0.6) !important;
+  text-shadow: none !important;
+}
+
+/* 鼠标放上去变清晰 */
+#nav .site-icon:hover, #nav .site-name:hover {
+  opacity: 1 !important;
+  filter: grayscale(0%) brightness(100%) !important; /* 悬停时恢复原色，会有惊艳的交互感 */
 }
 
 /* =========================================
-   B. 标题方案：水墨书法 + 红色印章
+   B. 优化标题与印章：让它们更紧凑
    ========================================= */
 #site-title {
   font-family: 'Zhi Mang Xing', cursive !important;
-  font-size: 4.5rem !important;
+  font-size: 4.8rem !important; /* 再大一点 */
   font-weight: 400 !important;
-  color: #f5f5f5 !important;
-  letter-spacing: 5px !important;
+  color: #f0f0f0 !important;
+  letter-spacing: 0px !important; /* 稍微紧凑一点，更有书法感 */
+  text-shadow: 3px 3px 5px rgba(0,0,0,0.5);
   
-  /* 墨韵投影 */
-  text-shadow: 
-      3px 3px 5px rgba(0, 0, 0, 0.5), 
-      0 0 20px rgba(0, 0, 0, 0.3) !important;
-      
+  /* 关键：使用 Flex 布局让印章自动对齐 */
+  display: flex !important;
+  align-items: center; 
+  justify-content: flex-end; /* 靠右对齐 */
+  
   margin: 0 !important;
-  position: relative;
+  padding-bottom: 10px; /* 给底部留点呼吸空间 */
 }
 
-/* 【点睛】红色电子印章 */
+/* 修复后的印章 */
 #site-title::after {
-  content: '柳印'; 
-  font-size: 0.8rem;
-  font-family: "SimSun", "Songti SC", serif;
-  color: rgba(255, 255, 255, 0.95);
+  content: '柳印';
+  font-size: 0.9rem;
+  font-family: "SimSun", serif; /* 宋体 */
+  color: rgba(255, 255, 255, 0.9);
   background-color: #b22222; /* 丹砂红 */
   
-  display: inline-block;
-  vertical-align: top;
-  margin-left: 15px;
-  padding: 2px 5px;
-  border-radius: 2px;
+  /* 调整印章位置 */
+  margin-left: 15px !important; /* 稍微拉近一点 */
+  padding: 4px 6px;
+  border-radius: 3px;
+  line-height: 1;
   
-  box-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-  border: 1px solid rgba(255,255,255,0.2);
+  /* 稍微旋转一点，模拟盖章的不完美感 */
+  transform: rotate(8deg); 
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
   opacity: 0.9;
-  transform: rotate(5deg) translateY(-5px);
+  
+  /* 强制不换行 */
+  white-space: nowrap;
 }
 
 /* =========================================
-   C. 布局与遮罩 (保持不变)
+   C. 布局修正
    ========================================= */
+#page-header #site-info {
+  bottom: 50px !important; /* 稍微提上来一点，别贴底太死 */
+  right: 8% !important;    /* 稍微往左挪一点，构图更稳 */
+}
+
 /* 遮罩 */
 #page-header::before {
-  content: '' !important;
-  position: absolute !important;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(to top left, rgba(0,0,0,0.5) 0%, transparent 50%) !important;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* 定位 */
-#page-header #site-info {
-  position: absolute !important;
-  bottom: 40px !important; 
-  right: 6% !important; 
-  left: auto !important; 
-  width: auto !important;
-  text-align: right !important; 
-  transform: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  z-index: 10 !important;
+  background: linear-gradient(to top left, rgba(0,0,0,0.4) 0%, transparent 60%) !important;
 }
 
 /* =========================================
-   D. 开场动画核心代码 (完全保留，请勿删除)
+   D. 必须保留的动画代码 (原封不动)
    ========================================= */
 #cyber-loader {
   position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -251,14 +246,11 @@
   background: transparent; pointer-events: none; opacity: 1;
   transition: opacity 0.5s ease 1.2s;
 }
-
 .cyber-curtain {
   position: absolute; top: 0; left: 0; width: 100%; height: 100%;
   will-change: transform;
   transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
 }
-
-/* 紫色区域 */
 .curtain-orange {
   background-color: #050505;
   background-image: 
@@ -268,8 +260,6 @@
   z-index: 2;
   filter: drop-shadow(0 0 5px rgba(162, 89, 255, 0.5));
 }
-
-/* 绿色区域 */
 .curtain-green {
   background-color: #050505;
   background-image: 
@@ -280,8 +270,6 @@
   transition-delay: 0.15s;
   filter: drop-shadow(0 0 5px rgba(0, 255, 127, 0.5));
 }
-
-/* 赛博文字 */
 .cyber-text {
   position: relative; z-index: 10;
   font-family: 'Courier New', monospace;
@@ -293,13 +281,10 @@
   transition: all 0.5s ease;
   animation: cyber-pulse 2s infinite;
 }
-
 @keyframes cyber-pulse {
   0%, 100% { box-shadow: 0 0 15px rgba(162, 89, 255, 0.6); border-color: rgba(255,255,255,0.3); }
   50% { box-shadow: 0 0 25px rgba(162, 89, 255, 1); border-color: #fff; }
 }
-
-/* 动画触发状态 */
 body.loaded #cyber-loader { opacity: 0; pointer-events: none; }
 body.loaded .curtain-orange { transform: translate3d(-105%, -105%, 0); }
 body.loaded .curtain-green { transform: translate3d(105%, 105%, 0); }
@@ -331,7 +316,7 @@ body.loaded .cyber-text { opacity: 0; transform: scale(0.9); filter: blur(10px);
         </li>
       
     </ul>
-  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">2</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-02-04T13:58:01.760Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 周胤龙</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><div id="cyber-loader">
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">2</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-02-04T14:03:27.873Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By 周胤龙</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"></div><div id="cyber-loader">
   <div class="cyber-curtain curtain-green"></div>
   <div class="cyber-curtain curtain-orange"></div>
   <div class="cyber-text">SYSTEM_INITIALIZING_</div>
