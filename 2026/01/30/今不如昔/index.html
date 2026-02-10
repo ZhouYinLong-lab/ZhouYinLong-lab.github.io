@@ -349,7 +349,7 @@ body.loaded .cyber-text { opacity: 0; transform: scale(0.9); filter: blur(10px);
     const countELement = document.getElementById('twikoo-count')
     if(!countELement) return
     twikoo.getCommentsCount({
-      envId: 'https://my-twikoo-server-8x6l.vercel.app/',
+      envId: 'https://my-twikoo-server-8x6l.vercel.app',
       region: '',
       urls: [window.location.pathname],
       includeReply: false
@@ -363,7 +363,7 @@ body.loaded .cyber-text { opacity: 0; transform: scale(0.9); filter: blur(10px);
   const init = (el = document, path = location.pathname) => {
     twikoo.init({
       el: el.querySelector('#twikoo-wrap'),
-      envId: 'https://my-twikoo-server-8x6l.vercel.app/',
+      envId: 'https://my-twikoo-server-8x6l.vercel.app',
       region: '',
       onCommentLoaded: () => {
         btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
