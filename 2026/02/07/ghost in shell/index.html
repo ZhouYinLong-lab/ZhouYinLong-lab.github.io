@@ -164,15 +164,11 @@
 }</script><link rel="stylesheet" href="/css/custom.css"><link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
 
 <style>
-/* 彻底隐藏顶部导航栏 */
-#nav {
-  display: none !important;
-}
-/* =========================================
-   【首页特效区】只在首页生效 (.full_page)
-   ========================================= */
+/* 隐藏原有导航栏 */
+#nav { display: none !important; }
 
-/* 1. 首页标题：寒柳别苑 */
+/* --- 首页 (Full Page) 特效设定 --- */
+/* 标题字体与排版 */
 #page-header.full_page #site-title {
   font-family: 'Zhi Mang Xing', cursive !important;
   font-size: 4.8rem !important;
@@ -180,41 +176,34 @@
   color: #f0f0f0 !important;
   letter-spacing: 2px !important;
   text-shadow: 3px 3px 5px rgba(0,0,0,0.5);
-  
   display: flex !important;
   align-items: center; 
   justify-content: flex-end;
   margin: 0 !important;
   padding-bottom: 5px;
 }
-
-/* 2. 首页印章：柳下语 */
+/* 印章特效 */
 #page-header.full_page #site-title::after {
   content: '' !important;
   background-image: url('/img/stamp.png') !important;
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
-  
   width: 72px !important;
   height: 30px !important;
-  
   background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
   border-radius: 0 !important;
   padding: 0 !important;
-
   display: inline-block !important;
   vertical-align: bottom !important; 
   margin-left: 0px !important;       
   margin-bottom: 20px !important;     
-  
   opacity: 0.85 !important; 
   transform: rotate(15deg) !important; 
 }
-
-/* 3. 首页布局修正 */
+/* 信息栏位置修正 */
 #page-header.full_page #site-info {
   position: absolute !important;
   bottom: 50px !important;
@@ -223,8 +212,7 @@
   width: auto !important;
   text-align: right !important;
 }
-
-/* 4. 首页遮罩 */
+/* 首页暗色遮罩 */
 #page-header.full_page::before {
   content: '' !important;
   position: absolute !important;
@@ -234,66 +222,21 @@
   z-index: 1;
 }
 
-/* =========================================
-   【全局通用区】开场动画
-   ========================================= */
-#cyber-loader {
-  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-  z-index: 2147483647; display: flex; justify-content: center; align-items: center;
-  background: transparent; pointer-events: none; opacity: 1;
-  transition: opacity 0.5s ease 1.2s;
-}
-.cyber-curtain {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  will-change: transform;
-  transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
-}
-.curtain-orange {
-  background-color: #050505;
-  background-image: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(162, 89, 255, 0.1) 20px, rgba(162, 89, 255, 0.1) 40px), linear-gradient(180deg, transparent 0%, transparent 30%, #a259ff 30%, #a259ff 30.5%, transparent 30.5%, transparent 60%, #a259ff 60%, #a259ff 62%, transparent 62%);
-  clip-path: polygon(0 0, 100% 0, 0 100%); z-index: 2; filter: drop-shadow(0 0 5px rgba(162, 89, 255, 0.5));
-}
-.curtain-green {
-  background-color: #050505;
-  background-image: repeating-linear-gradient(-45deg, transparent, transparent 15px, rgba(0, 255, 127, 0.1) 15px, rgba(0, 255, 127, 0.1) 30px), linear-gradient(90deg, transparent 0%, transparent 10%, #00ff7f 10%, #00ff7f 10.5%, transparent 10.5%, transparent 80%, #00ff7f 80%, #00ff7f 81%, transparent 81%);
-  clip-path: polygon(100% 0, 100% 100%, 0 100%); z-index: 1; transition-delay: 0.15s; filter: drop-shadow(0 0 5px rgba(0, 255, 127, 0.5));
-}
-.cyber-text {
-  position: relative; z-index: 10; font-family: 'Courier New', monospace; font-size: 2.5rem; font-weight: 900; color: #fff; background: #000; padding: 10px 25px; letter-spacing: 4px; border: 1px solid rgba(255,255,255,0.3); box-shadow: 0 0 15px rgba(162, 89, 255, 0.6); text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 2px 2px 0px #a259ff; transition: all 0.5s ease; animation: cyber-pulse 2s infinite;
-}
-@keyframes cyber-pulse {
-  0%, 100% { box-shadow: 0 0 15px rgba(162, 89, 255, 0.6); border-color: rgba(255,255,255,0.3); }
-  50% { box-shadow: 0 0 25px rgba(162, 89, 255, 1); border-color: #fff; }
-}
-body.loaded #cyber-loader { opacity: 0; pointer-events: none; }
-body.loaded .curtain-orange { transform: translate3d(-105%, -105%, 0); }
-body.loaded .curtain-green { transform: translate3d(105%, 105%, 0); }
-body.loaded .cyber-text { opacity: 0; transform: scale(0.9); filter: blur(10px); }
-
-/* =========================================
-   6. 【关键修复】非首页（文章/归档）样式
-   ========================================= */
-
-/* A. 设置非首页的顶部背景图 */
+/* --- 非首页 (文章/归档) 样式修正 --- */
 #page-header:not(.full_page) {
-  /* 请确保把你的图片重命名为 archive.jpg 并放在 /source/img/ 下 */
   background-image: url('/img/moonlight.png') !important;
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
 }
-
-/* B. 标题位置上移 (从50%改为30%，防止压到底部) */
 #page-header:not(.full_page) #page-site-info {
   position: absolute !important;
-  top: 35% !important;  /* 【重点修改】数值越小越靠上 */
+  top: 35% !important;
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
   width: 100% !important;
   text-align: center !important;
 }
-
-/* C. 字体样式 */
 #page-header:not(.full_page) #page-title {
   font-family: 'Zhi Mang Xing', cursive !important;
   font-size: 3rem !important; 
@@ -301,6 +244,142 @@ body.loaded .cyber-text { opacity: 0; transform: scale(0.9); filter: blur(10px);
   margin: 0 !important;
 }
 </style>
+
+<script>
+(function() {
+  // [逻辑] 判断首页
+  var isHome = window.location.pathname === '/' || window.location.pathname === '/index.html';
+
+  // [CSS] 通用容器 (Z-Index 极高，且加载时锁定 Body 滚动)
+  var commonCSS = `
+    #loader-mask {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+      z-index: 2147483647; display: flex; justify-content: center; align-items: center;
+      transition: opacity 0.6s;
+    }
+    /* 临时锁定滚动的类 */
+    body.is-loading { overflow: hidden !important; }
+  `;
+
+  // [CSS] 动画 A：首页 (翻转文字) - 已加 home- 前缀防止冲突
+  var cssA = `
+    #loader-mask { background-color: #444; }
+    .loader-home { position: relative; width: 100%; height: 60px; text-align: center; }
+    .loader-home span {
+      position: absolute; width: 30px; height: 60px; line-height: 60px;
+      margin: 0 10px; color: #fff; font-size: 40px; text-align: center;
+      transform: rotate(180deg); opacity: 0;
+      animation: home-move 2.5s linear infinite;
+    }
+    .loader-home span::after {
+      content: ""; position: absolute; left: 0; bottom: -20px;
+      width: 30px; height: 5px; border-radius: 50%;
+      background-color: rgba(0,0,0,0.15); filter: blur(1.5px);
+    }
+    .loader-home span:nth-child(2) { animation-delay: 0.2s; }
+    .loader-home span:nth-child(3) { animation-delay: 0.4s; }
+    .loader-home span:nth-child(4) { animation-delay: 0.6s; }
+    .loader-home span:nth-child(5) { animation-delay: 0.8s; }
+    .loader-home span:nth-child(6) { animation-delay: 1s; }
+    .loader-home span:nth-child(7) { animation-delay: 1.2s; }
+    .loader-home span:nth-child(8) { animation-delay: 1.4s; }
+    .loader-home span:nth-child(9) { animation-delay: 1.6s; }
+    .loader-home span:nth-child(10) { animation-delay: 1.8s; }
+    
+    .loader-home span:nth-child(8)::before, 
+    .loader-home span:nth-child(9)::before, 
+    .loader-home span:nth-child(10)::before {
+      content: ""; position: absolute; left: 0; bottom: 13px;
+      width: 30px; height: 30px; border-radius: 50%;
+    }
+    .loader-home span:nth-child(8)::before { background-color: #eccc68; }
+    .loader-home span:nth-child(9)::before { background-color: #7bed9f; }
+    .loader-home span:nth-child(10)::before { background-color: #ff6b81; }
+
+    @keyframes home-move {
+      0% { right: 0; opacity: 0; }
+      35% { right: 41%; transform: rotate(0deg); opacity: 1; }
+      65% { right: 59%; transform: rotate(0deg); opacity: 1; }
+      100% { right: 100%; transform: rotate(-180deg); opacity: 0; }
+    }
+  `;
+  var htmlA = `
+    <div class="loader-home">
+      <span>L</span><span>O</span><span>A</span><span>D</span><span>I</span><span>N</span><span>G</span>
+      <span></span><span></span><span></span>
+    </div>
+  `;
+
+  // [CSS] 动画 B：文章页 (九连环) - 已加 art- 前缀防止冲突
+  var cssB = `
+    #loader-mask { background-color: #000; }
+    .loader-article {
+      width: 300px; height: 300px; position: relative;
+      display: flex; justify-content: center; align-items: center;
+      --h: calc(var(--percent) / 100 * 360);
+      color: hsl(var(--h), 100%, 75%);
+      animation: art-color 5s linear infinite;
+    }
+    .loader-article span {
+      position: absolute;
+      --diameter: calc(50px + (var(--n) - 1) * 30px);
+      width: var(--diameter); height: var(--diameter);
+      border-style: solid; border-color: currentColor transparent;
+      border-width: 10px 10px 0 0; border-radius: 50%;
+      animation: art-rotate linear infinite;
+      animation-duration: calc(5s / (9 - var(--n) + 1));
+    }
+    .loader-article span:nth-child(1) { --n: 1; }
+    .loader-article span:nth-child(2) { --n: 2; }
+    .loader-article span:nth-child(3) { --n: 3; }
+    .loader-article span:nth-child(4) { --n: 4; }
+    .loader-article span:nth-child(5) { --n: 5; }
+    .loader-article span:nth-child(6) { --n: 6; }
+    .loader-article span:nth-child(7) { --n: 7; }
+    .loader-article span:nth-child(8) { --n: 8; }
+    .loader-article span:nth-child(9) { --n: 9; }
+    
+    @keyframes art-rotate { to { transform: rotate(1turn); } }
+    @keyframes art-color {
+      0%,100% { --percent: 0; } 10% { --percent: 10; } 20% { --percent: 20; }
+      30% { --percent: 30; } 40% { --percent: 40; } 50% { --percent: 50; }
+      60% { --percent: 60; } 70% { --percent: 70; } 80% { --percent: 80; } 90% { --percent: 90; }
+    }
+  `;
+  var htmlB = `
+    <div class="loader-article">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+  `;
+
+  // [渲染执行] 优先写入 CSS 和 HTML
+  var finalCSS = commonCSS + (isHome ? cssA : cssB);
+  var finalHTML = '<div id="loader-mask">' + (isHome ? htmlA : htmlB) + '</div>';
+  
+  // 锁定 Body 滚动
+  document.write('<style>' + finalCSS + '</style>');
+  document.body.classList.add('is-loading'); 
+  document.write(finalHTML);
+
+  // [销毁逻辑] 页面加载完毕后执行
+  var removeLoader = function() {
+    var mask = document.getElementById('loader-mask');
+    if (mask) {
+      mask.style.opacity = '0';
+      document.body.classList.remove('is-loading'); // 解锁滚动
+      setTimeout(function() { 
+        if(mask.parentNode) mask.parentNode.removeChild(mask); 
+      }, 600);
+    }
+  };
+
+  window.addEventListener('load', removeLoader);
+  
+  // [安全兜底] 8秒强制销毁 (防止网络卡顿导致动画卡死)
+  setTimeout(removeLoader, 8000);
+})();
+</script>
 <meta name="generator" content="Hexo 8.1.1"><link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
 <script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
 </head><body><div class="bg-animation" id="web_bg" style="background: [object Object];"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/ghost/ghost1.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"></a><a class="nav-page-title" href="/"><span class="site-name">“接下来我们将要面对面”——《攻壳机动队》影评</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">“接下来我们将要面对面”——《攻壳机动队》影评</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-02-07T10:00:00.000Z" title="发表于 2026-02-07 18:00:00">2026-02-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-02-10T08:03:57.759Z" title="更新于 2026-02-10 16:03:57">2026-02-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%94%E4%B8%A4/">罔两</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="twikoo_visitors"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/02/07/ghost%20in%20shell/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p><img src="/img/ghost/ghost2.png" alt="开篇第一幕"></p>
@@ -309,12 +388,12 @@ body.loaded .cyber-text { opacity: 0; transform: scale(0.9); filter: blur(10px);
 </blockquote>
 <p>在这个被算法推荐和短视频填满的午后，重温押井守1995年的《攻壳机动队》，绝非一次简单的怀旧。</p>
 
-        <div id="aplayer-xViynLqO" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-WBDouSpQ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-xViynLqO"),
+            element: document.getElementById("aplayer-WBDouSpQ"),
             narrow: false,
             autoplay: false,
             showlrc: false,
@@ -427,21 +506,4 @@ body.loaded .cyber-text { opacity: 0; transform: scale(0.9); filter: blur(10px);
   } else {
     window.loadOtherComment = loadTwikoo
   }
-})()</script></div><div id="cyber-loader">
-  <div class="cyber-curtain curtain-green"></div>
-  <div class="cyber-curtain curtain-orange"></div>
-  <div class="cyber-text">SYSTEM_INITIALIZING_</div>
-</div>
-<script>
-window.addEventListener('load', function() {
-  setTimeout(function() {
-    document.body.classList.add('loaded');
-  }, 1000);
-});
-setTimeout(function() {
-  if (!document.body.classList.contains('loaded')) {
-     document.body.classList.add('loaded');
-  }
-}, 5000);
-</script>
-<script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
