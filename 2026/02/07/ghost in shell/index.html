@@ -168,7 +168,6 @@
 #nav { display: none !important; }
 
 /* --- 首页 (Full Page) 特效设定 --- */
-/* 标题字体与排版 */
 #page-header.full_page #site-title {
   font-family: 'Zhi Mang Xing', cursive !important;
   font-size: 4.8rem !important;
@@ -182,7 +181,6 @@
   margin: 0 !important;
   padding-bottom: 5px;
 }
-/* 印章特效 */
 #page-header.full_page #site-title::after {
   content: '' !important;
   background-image: url('/img/stamp.png') !important;
@@ -203,7 +201,6 @@
   opacity: 0.85 !important; 
   transform: rotate(15deg) !important; 
 }
-/* 信息栏位置修正 */
 #page-header.full_page #site-info {
   position: absolute !important;
   bottom: 50px !important;
@@ -212,7 +209,6 @@
   width: auto !important;
   text-align: right !important;
 }
-/* 首页暗色遮罩 */
 #page-header.full_page::before {
   content: '' !important;
   position: absolute !important;
@@ -250,18 +246,17 @@
   // [逻辑] 判断首页
   var isHome = window.location.pathname === '/' || window.location.pathname === '/index.html';
 
-  // [CSS] 通用容器 (Z-Index 极高，且加载时锁定 Body 滚动)
+  // [CSS] 通用容器 (修复点：直接在这里禁止 html 滚动，不依赖 body)
   var commonCSS = `
+    html { overflow: hidden; } /* 核心修复：加载时锁定滚动 */
     #loader-mask {
       position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
       z-index: 2147483647; display: flex; justify-content: center; align-items: center;
       transition: opacity 0.6s;
     }
-    /* 临时锁定滚动的类 */
-    body.is-loading { overflow: hidden !important; }
   `;
 
-  // [CSS] 动画 A：首页 (翻转文字) - 已加 home- 前缀防止冲突
+  // [CSS] 动画 A：首页 (翻转文字)
   var cssA = `
     #loader-mask { background-color: #444; }
     .loader-home { position: relative; width: 100%; height: 60px; text-align: center; }
@@ -310,7 +305,7 @@
     </div>
   `;
 
-  // [CSS] 动画 B：文章页 (九连环) - 已加 art- 前缀防止冲突
+  // [CSS] 动画 B：文章页 (九连环)
   var cssB = `
     #loader-mask { background-color: #000; }
     .loader-article {
@@ -353,13 +348,12 @@
     </div>
   `;
 
-  // [渲染执行] 优先写入 CSS 和 HTML
+  // [渲染执行]
   var finalCSS = commonCSS + (isHome ? cssA : cssB);
   var finalHTML = '<div id="loader-mask">' + (isHome ? htmlA : htmlB) + '</div>';
   
-  // 锁定 Body 滚动
+  // 关键修正：只写 CSS 和 HTML，不触碰 document.body
   document.write('<style>' + finalCSS + '</style>');
-  document.body.classList.add('is-loading'); 
   document.write(finalHTML);
 
   // [销毁逻辑] 页面加载完毕后执行
@@ -367,7 +361,7 @@
     var mask = document.getElementById('loader-mask');
     if (mask) {
       mask.style.opacity = '0';
-      document.body.classList.remove('is-loading'); // 解锁滚动
+      document.documentElement.style.overflow = ''; // 解锁滚动 (针对 html 标签)
       setTimeout(function() { 
         if(mask.parentNode) mask.parentNode.removeChild(mask); 
       }, 600);
@@ -375,9 +369,7 @@
   };
 
   window.addEventListener('load', removeLoader);
-  
-  // [安全兜底] 8秒强制销毁 (防止网络卡顿导致动画卡死)
-  setTimeout(removeLoader, 8000);
+  setTimeout(removeLoader, 8000); // 兜底
 })();
 </script>
 <meta name="generator" content="Hexo 8.1.1"><link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
@@ -388,12 +380,12 @@
 </blockquote>
 <p>在这个被算法推荐和短视频填满的午后，重温押井守1995年的《攻壳机动队》，绝非一次简单的怀旧。</p>
 
-        <div id="aplayer-WBDouSpQ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-BOhKVKIr" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-WBDouSpQ"),
+            element: document.getElementById("aplayer-BOhKVKIr"),
             narrow: false,
             autoplay: false,
             showlrc: false,
