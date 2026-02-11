@@ -164,7 +164,6 @@
 }</script><link rel="stylesheet" href="/css/custom.css"><link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
 
 <style>
-/* 隐藏原有导航栏 */
 #nav { display: none !important; }
 
 /* --- 首页 (Full Page) 特效设定 --- */
@@ -243,12 +242,11 @@
 
 <script>
 (function() {
-  // [逻辑] 判断首页
   var isHome = window.location.pathname === '/' || window.location.pathname === '/index.html';
 
-  // [CSS] 通用容器 (修复点：直接在这里禁止 html 滚动，不依赖 body)
+  // [CSS] 这里的核心改动：不再全局禁止滚动，而是只禁止带有 .locked 类的 html
   var commonCSS = `
-    html { overflow: hidden; } /* 核心修复：加载时锁定滚动 */
+    html.locked { overflow: hidden !important; } /* 只有戴上手铐才锁 */
     #loader-mask {
       position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
       z-index: 2147483647; display: flex; justify-content: center; align-items: center;
@@ -256,7 +254,7 @@
     }
   `;
 
-  // [CSS] 动画 A：首页 (翻转文字)
+  // [CSS] 动画 A (首页)
   var cssA = `
     #loader-mask { background-color: #444; }
     .loader-home { position: relative; width: 100%; height: 60px; text-align: center; }
@@ -280,17 +278,12 @@
     .loader-home span:nth-child(8) { animation-delay: 1.4s; }
     .loader-home span:nth-child(9) { animation-delay: 1.6s; }
     .loader-home span:nth-child(10) { animation-delay: 1.8s; }
-    
-    .loader-home span:nth-child(8)::before, 
-    .loader-home span:nth-child(9)::before, 
-    .loader-home span:nth-child(10)::before {
-      content: ""; position: absolute; left: 0; bottom: 13px;
-      width: 30px; height: 30px; border-radius: 50%;
+    .loader-home span:nth-child(8)::before, .loader-home span:nth-child(9)::before, .loader-home span:nth-child(10)::before {
+      content: ""; position: absolute; left: 0; bottom: 13px; width: 30px; height: 30px; border-radius: 50%;
     }
     .loader-home span:nth-child(8)::before { background-color: #eccc68; }
     .loader-home span:nth-child(9)::before { background-color: #7bed9f; }
     .loader-home span:nth-child(10)::before { background-color: #ff6b81; }
-
     @keyframes home-move {
       0% { right: 0; opacity: 0; }
       35% { right: 41%; transform: rotate(0deg); opacity: 1; }
@@ -305,7 +298,7 @@
     </div>
   `;
 
-  // [CSS] 动画 B：文章页 (九连环)
+  // [CSS] 动画 B (文章页)
   var cssB = `
     #loader-mask { background-color: #000; }
     .loader-article {
@@ -333,7 +326,6 @@
     .loader-article span:nth-child(7) { --n: 7; }
     .loader-article span:nth-child(8) { --n: 8; }
     .loader-article span:nth-child(9) { --n: 9; }
-    
     @keyframes art-rotate { to { transform: rotate(1turn); } }
     @keyframes art-color {
       0%,100% { --percent: 0; } 10% { --percent: 10; } 20% { --percent: 20; }
@@ -352,16 +344,19 @@
   var finalCSS = commonCSS + (isHome ? cssA : cssB);
   var finalHTML = '<div id="loader-mask">' + (isHome ? htmlA : htmlB) + '</div>';
   
-  // 关键修正：只写 CSS 和 HTML，不触碰 document.body
   document.write('<style>' + finalCSS + '</style>');
   document.write(finalHTML);
+  
+  // [关键操作] 立即给 html 标签戴上手铐
+  document.documentElement.classList.add('locked');
 
-  // [销毁逻辑] 页面加载完毕后执行
+  // [销毁逻辑]
   var removeLoader = function() {
     var mask = document.getElementById('loader-mask');
     if (mask) {
       mask.style.opacity = '0';
-      document.documentElement.style.overflow = ''; // 解锁滚动 (针对 html 标签)
+      // [关键操作] 动画结束，摘掉手铐！
+      document.documentElement.classList.remove('locked');
       setTimeout(function() { 
         if(mask.parentNode) mask.parentNode.removeChild(mask); 
       }, 600);
@@ -369,7 +364,7 @@
   };
 
   window.addEventListener('load', removeLoader);
-  setTimeout(removeLoader, 8000); // 兜底
+  setTimeout(removeLoader, 8000); // 8秒兜底
 })();
 </script>
 <meta name="generator" content="Hexo 8.1.1"><link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
@@ -380,12 +375,12 @@
 </blockquote>
 <p>在这个被算法推荐和短视频填满的午后，重温押井守1995年的《攻壳机动队》，绝非一次简单的怀旧。</p>
 
-        <div id="aplayer-ieFJtumk" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-TLNGBINH" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-ieFJtumk"),
+            element: document.getElementById("aplayer-TLNGBINH"),
             narrow: false,
             autoplay: false,
             showlrc: false,

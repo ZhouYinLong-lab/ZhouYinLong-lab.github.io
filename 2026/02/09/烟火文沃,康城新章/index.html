@@ -162,7 +162,6 @@
 }</script><link rel="stylesheet" href="/css/custom.css"><link href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
 
 <style>
-/* 隐藏原有导航栏 */
 #nav { display: none !important; }
 
 /* --- 首页 (Full Page) 特效设定 --- */
@@ -241,12 +240,11 @@
 
 <script>
 (function() {
-  // [逻辑] 判断首页
   var isHome = window.location.pathname === '/' || window.location.pathname === '/index.html';
 
-  // [CSS] 通用容器 (修复点：直接在这里禁止 html 滚动，不依赖 body)
+  // [CSS] 这里的核心改动：不再全局禁止滚动，而是只禁止带有 .locked 类的 html
   var commonCSS = `
-    html { overflow: hidden; } /* 核心修复：加载时锁定滚动 */
+    html.locked { overflow: hidden !important; } /* 只有戴上手铐才锁 */
     #loader-mask {
       position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
       z-index: 2147483647; display: flex; justify-content: center; align-items: center;
@@ -254,7 +252,7 @@
     }
   `;
 
-  // [CSS] 动画 A：首页 (翻转文字)
+  // [CSS] 动画 A (首页)
   var cssA = `
     #loader-mask { background-color: #444; }
     .loader-home { position: relative; width: 100%; height: 60px; text-align: center; }
@@ -278,17 +276,12 @@
     .loader-home span:nth-child(8) { animation-delay: 1.4s; }
     .loader-home span:nth-child(9) { animation-delay: 1.6s; }
     .loader-home span:nth-child(10) { animation-delay: 1.8s; }
-    
-    .loader-home span:nth-child(8)::before, 
-    .loader-home span:nth-child(9)::before, 
-    .loader-home span:nth-child(10)::before {
-      content: ""; position: absolute; left: 0; bottom: 13px;
-      width: 30px; height: 30px; border-radius: 50%;
+    .loader-home span:nth-child(8)::before, .loader-home span:nth-child(9)::before, .loader-home span:nth-child(10)::before {
+      content: ""; position: absolute; left: 0; bottom: 13px; width: 30px; height: 30px; border-radius: 50%;
     }
     .loader-home span:nth-child(8)::before { background-color: #eccc68; }
     .loader-home span:nth-child(9)::before { background-color: #7bed9f; }
     .loader-home span:nth-child(10)::before { background-color: #ff6b81; }
-
     @keyframes home-move {
       0% { right: 0; opacity: 0; }
       35% { right: 41%; transform: rotate(0deg); opacity: 1; }
@@ -303,7 +296,7 @@
     </div>
   `;
 
-  // [CSS] 动画 B：文章页 (九连环)
+  // [CSS] 动画 B (文章页)
   var cssB = `
     #loader-mask { background-color: #000; }
     .loader-article {
@@ -331,7 +324,6 @@
     .loader-article span:nth-child(7) { --n: 7; }
     .loader-article span:nth-child(8) { --n: 8; }
     .loader-article span:nth-child(9) { --n: 9; }
-    
     @keyframes art-rotate { to { transform: rotate(1turn); } }
     @keyframes art-color {
       0%,100% { --percent: 0; } 10% { --percent: 10; } 20% { --percent: 20; }
@@ -350,16 +342,19 @@
   var finalCSS = commonCSS + (isHome ? cssA : cssB);
   var finalHTML = '<div id="loader-mask">' + (isHome ? htmlA : htmlB) + '</div>';
   
-  // 关键修正：只写 CSS 和 HTML，不触碰 document.body
   document.write('<style>' + finalCSS + '</style>');
   document.write(finalHTML);
+  
+  // [关键操作] 立即给 html 标签戴上手铐
+  document.documentElement.classList.add('locked');
 
-  // [销毁逻辑] 页面加载完毕后执行
+  // [销毁逻辑]
   var removeLoader = function() {
     var mask = document.getElementById('loader-mask');
     if (mask) {
       mask.style.opacity = '0';
-      document.documentElement.style.overflow = ''; // 解锁滚动 (针对 html 标签)
+      // [关键操作] 动画结束，摘掉手铐！
+      document.documentElement.classList.remove('locked');
       setTimeout(function() { 
         if(mask.parentNode) mask.parentNode.removeChild(mask); 
       }, 600);
@@ -367,7 +362,7 @@
   };
 
   window.addEventListener('load', removeLoader);
-  setTimeout(removeLoader, 8000); // 兜底
+  setTimeout(removeLoader, 8000); // 8秒兜底
 })();
 </script>
 <meta name="generator" content="Hexo 8.1.1"></head><body><div class="bg-animation" id="web_bg" style="background: [object Object];"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/water/water1.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"></a><a class="nav-page-title" href="/"><span class="site-name">烟火文沃，康城新章</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">烟火文沃，康城新章</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-02-09T14:00:00.000Z" title="发表于 2026-02-09 22:00:00">2026-02-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-02-10T08:38:16.183Z" title="更新于 2026-02-10 16:38:16">2026-02-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BC%BC%E6%B0%B4/">似水</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="twikoo_visitors"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/02/09/%E7%83%9F%E7%81%AB%E6%96%87%E6%B2%83,%E5%BA%B7%E5%9F%8E%E6%96%B0%E7%AB%A0/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>近日屡次返回我曾居住的旧社区——文沃，与我三年半前往新城区上高中搬走时相比，变化颇巨，感慨良多，故留此纪念。</p>
