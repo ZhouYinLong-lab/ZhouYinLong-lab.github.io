@@ -217,6 +217,41 @@
   z-index: 1;
 }
 
+/* 1. 隐藏原本的 FontAwesome 箭头图标 */
+#pagination .prev i, 
+#pagination .next i {
+  display: none !important;
+}
+
+/* 2. 设置“上一页”按钮的背景图 */
+#pagination .extend.prev {
+/* 替换为你的图片路径 */
+  background-image: url('/img/left.png') !important; 
+
+/* 调整图片显示方式 */
+  background-size: 50% !important; /* 图标大小，根据图片实际大小调整 (30%-80%均可) */
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+
+/* 可选：如果你现在的按钮是白色的看不清，可以加个深色背景试调 */
+/* background-color: #333 !important; */
+}
+
+/* 3. 设置“下一页”按钮的背景图 */
+#pagination .extend.next {
+  background-image: url('/img/right.png') !important;
+  background-size: 50% !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* 4. (可选) 鼠标悬停时的效果 - 比如稍微放大一点 */
+#pagination .extend.prev:hover,
+#pagination .extend.next:hover {
+  background-size: 60% !important; /* 悬停时变大到 60% */
+  transition: background-size 0.3s;
+}
+
 /* --- 非首页 (文章/归档) 样式修正 --- */
 #page-header:not(.full_page) {
   background-image: url('/img/moonlight.png') !important;
@@ -375,12 +410,12 @@
 </blockquote>
 <p>在这个被算法推荐和短视频填满的午后，重温押井守1995年的《攻壳机动队》，绝非一次简单的怀旧。</p>
 
-        <div id="aplayer-jzidogNY" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-wbcSmQmU" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-jzidogNY"),
+            element: document.getElementById("aplayer-wbcSmQmU"),
             narrow: false,
             autoplay: false,
             showlrc: false,
