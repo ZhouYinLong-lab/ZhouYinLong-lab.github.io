@@ -328,6 +328,34 @@
   background-color: #ccc !important;
 }
 
+/* =========================================
+白天模式分页按钮：黑白灰极简风 (修改版)
+========================================= */
+
+/* 1. 当前页码 (Current) -> 黑色 */
+[data-theme="light"] #pagination .page-number.current {
+  background-color: #000 !important; /* 黑色背景 */
+  color: #fff !important;            /* 白色文字 */
+  box-shadow: none !important;       /* 去掉阴影，更扁平 */
+}
+
+/* 2. 鼠标悬停 (Hover) -> 灰色 */
+[data-theme="light"] #pagination .page-number:not(.current):hover,
+[data-theme="light"] #pagination .extend.prev:hover,
+[data-theme="light"] #pagination .extend.next:hover {
+  background-color: #888 !important; /* 灰色 (如果你觉得深了，可以改成 #ccc) */
+  color: #fff !important;            /* 悬停时文字变白 */
+  border-color: #888 !important;     /* 边框也变灰 */
+}
+
+/* 3. 其他普通页码 (Default) -> 白色 */
+[data-theme="light"] #pagination .page-number,
+[data-theme="light"] #pagination .extend.prev,
+[data-theme="light"] #pagination .extend.next {
+  background-color: #fff !important; /* 默认白色背景 */
+  color: #333 !important;            /* 默认深灰/黑色文字 */
+}
+
 </style>
 
 <script>
