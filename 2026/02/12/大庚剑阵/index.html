@@ -272,6 +272,33 @@
   text-shadow: 2px 2px 4px rgba(0,0,0,0.6); 
   margin: 0 !important;
 }
+
+
+/* =========================================
+自定义颜色修改：底部与右侧工具栏变黑
+========================================= */
+
+/* 1. 修改底部 (Footer) 背景为黑色 */
+#footer {
+  background: #000 !important;
+}
+/* 如果你想让底部文字颜色更亮一点，可以加这行 */
+#footer-wrap {
+  color: #fff !important;
+}
+
+/* 2. 修改右下角悬浮按钮 (设置、回到顶部等) 为黑色 */
+#rightside > div > button, 
+#rightside > div > a {
+  background-color: #000 !important;
+}
+
+/* 3. (可选) 鼠标悬停在右侧按钮时变成深灰色，增加交互感 */
+#rightside > div > button:hover, 
+#rightside > div > a:hover {
+  background-color: #333 !important;
+}
+
 </style>
 
 <script>
@@ -400,31 +427,6 @@
   window.addEventListener('load', removeLoader);
   setTimeout(removeLoader, 8000); // 8秒兜底
 })();
-
-/* =========================================
-自定义颜色修改：底部与右侧工具栏变黑
-========================================= */
-
-/* 1. 修改底部 (Footer) 背景为黑色 */
-#footer {
-  background: #000 !important;
-}
-/* 如果你想让底部文字颜色更亮一点，可以加这行 */
-#footer-wrap {
-  color: #fff !important;
-}
-
-/* 2. 修改右下角悬浮按钮 (设置、回到顶部等) 为黑色 */
-#rightside > div > button, 
-#rightside > div > a {
-  background-color: #000 !important;
-}
-
-/* 3. (可选) 鼠标悬停在右侧按钮时变成深灰色，增加交互感 */
-#rightside > div > button:hover, 
-#rightside > div > a:hover {
-  background-color: #333 !important;
-}
 
 </script>
 <meta name="generator" content="Hexo 8.1.1"></head><body><div class="bg-animation" id="web_bg" style="background: [object Object];"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/hanli/laomo.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"></a><a class="nav-page-title" href="/"><span class="site-name">大庚剑阵</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">大庚剑阵</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-02-12T13:00:00.000Z" title="发表于 2026-02-12 21:00:00">2026-02-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-02-12T13:00:00.000Z" title="更新于 2026-02-12 21:00:00">2026-02-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%9E%E9%AA%8C%E5%AE%A4/">实验室</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="twikoo_visitors"><i class="fa-solid fa-spinner fa-spin"></i></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/2026/02/12/%E5%A4%A7%E5%BA%9A%E5%89%91%E9%98%B5/#post-comment"><span id="twikoo-count"><i class="fa-solid fa-spinner fa-spin"></i></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="这是一个交互式页面"><a href="#这是一个交互式页面" class="headerlink" title="这是一个交互式页面"></a>这是一个交互式页面</h1><p>如果并没有自动跳转，请 <a href="/labs/Geng-Blade">点击这里</a> 进入。</p>

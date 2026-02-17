@@ -273,6 +273,33 @@
   text-shadow: 2px 2px 4px rgba(0,0,0,0.6); 
   margin: 0 !important;
 }
+
+
+/* =========================================
+自定义颜色修改：底部与右侧工具栏变黑
+========================================= */
+
+/* 1. 修改底部 (Footer) 背景为黑色 */
+#footer {
+  background: #000 !important;
+}
+/* 如果你想让底部文字颜色更亮一点，可以加这行 */
+#footer-wrap {
+  color: #fff !important;
+}
+
+/* 2. 修改右下角悬浮按钮 (设置、回到顶部等) 为黑色 */
+#rightside > div > button, 
+#rightside > div > a {
+  background-color: #000 !important;
+}
+
+/* 3. (可选) 鼠标悬停在右侧按钮时变成深灰色，增加交互感 */
+#rightside > div > button:hover, 
+#rightside > div > a:hover {
+  background-color: #333 !important;
+}
+
 </style>
 
 <script>
@@ -402,31 +429,6 @@
   setTimeout(removeLoader, 8000); // 8秒兜底
 })();
 
-/* =========================================
-自定义颜色修改：底部与右侧工具栏变黑
-========================================= */
-
-/* 1. 修改底部 (Footer) 背景为黑色 */
-#footer {
-  background: #000 !important;
-}
-/* 如果你想让底部文字颜色更亮一点，可以加这行 */
-#footer-wrap {
-  color: #fff !important;
-}
-
-/* 2. 修改右下角悬浮按钮 (设置、回到顶部等) 为黑色 */
-#rightside > div > button, 
-#rightside > div > a {
-  background-color: #000 !important;
-}
-
-/* 3. (可选) 鼠标悬停在右侧按钮时变成深灰色，增加交互感 */
-#rightside > div > button:hover, 
-#rightside > div > a:hover {
-  background-color: #333 !important;
-}
-
 </script>
 <meta name="generator" content="Hexo 8.1.1"><link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
 <script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
@@ -436,12 +438,12 @@
 </blockquote>
 <p>在这个被算法推荐和短视频填满的午后，重温押井守1995年的《攻壳机动队》，绝非一次简单的怀旧。</p>
 
-        <div id="aplayer-tnpNMJmZ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-QuXQNDLA" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-tnpNMJmZ"),
+            element: document.getElementById("aplayer-QuXQNDLA"),
             narrow: false,
             autoplay: false,
             showlrc: false,
