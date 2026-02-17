@@ -357,6 +357,26 @@
   color: #333 !important;            /* 默认深灰/黑色文字 */
 }
 
+/* =========================================
+修复：强制翻页按钮与数字按钮高度对齐
+========================================= */
+#pagination .page-number,
+#pagination .extend.prev,
+#pagination .extend.next {
+  vertical-align: middle !important; /* 核心：让它们沿着中线对齐，而不是基线 */
+  display: inline-block !important;  /* 确保它们排成一行 */
+
+  /* 强制统一尺寸，确保大家一般高 */
+  height: 35px !important;           
+  width: 35px !important;            
+  line-height: 35px !important;      /* 让里面的文字/图标垂直居中 */
+
+  /* 统一边距，防止有的挤有的宽 */
+  margin: 0 5px !important;   
+  padding: 0 !important;       
+  box-sizing: border-box !important;
+}
+
 </style>
 
 <script>
@@ -495,12 +515,12 @@
 </blockquote>
 <p>在这个被算法推荐和短视频填满的午后，重温押井守1995年的《攻壳机动队》，绝非一次简单的怀旧。</p>
 
-        <div id="aplayer-uZCpMJlN" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-efTDXcCU" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-uZCpMJlN"),
+            element: document.getElementById("aplayer-efTDXcCU"),
             narrow: false,
             autoplay: false,
             showlrc: false,
