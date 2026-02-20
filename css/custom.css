@@ -87,6 +87,11 @@ html, body, #web_container {
   font-weight: 900 !important;
 }
 
+/* 更改公告栏图标颜色 */
+#aside-sidebar .card-announcement .item-headline i {
+  color: #24749f !important; /* 把这里换成你喜欢的颜色代码，比如夜鹭蓝 */
+}
+
 #aside-sidebar .card-announcement .item-headline i:before {
   content: "\f3eb" !important; 
 }
