@@ -6,10 +6,47 @@ function changeRandomImg() {
 
     // 👇 你的图库（以后加图片就在这里加，随便换行，非常好维护）
     const imgList = [
-        "/img/zawu/a014b6131153107dfdc215f04c1433c4_720.jpg", // 睡觉的海豹
-        "/img/你的其他图片1.jpg", 
-        "/img/你的其他图片2.gif"
-        // 注意：除了最后一行，前面的每一行结尾都要有逗号
+        "/img/yelu/1.jpg", 
+        "/img/yelu/2.gif", 
+        "/img/yelu/3.gif", 
+        "/img/yelu/4.gif", 
+        "/img/yelu/5.jpg", 
+        "/img/yelu/6.jpg", 
+        "/img/yelu/7.gif", 
+        "/img/yelu/8.jpg", 
+        "/img/yelu/9.gif", 
+        "/img/yelu/10.gif", 
+        "/img/yelu/11.gif", 
+        "/img/yelu/12.jpg", 
+        "/img/yelu/13.jpg", 
+        "/img/yelu/14.jpg", 
+        "/img/yelu/15.jpg", 
+        "/img/yelu/16.jpg", 
+        "/img/yelu/17.jpg", 
+        "/img/yelu/18.jpg", 
+        "/img/yelu/19.jpg", 
+        "/img/yelu/20.jpg", 
+        "/img/yelu/21.gif", 
+        "/img/yelu/22.jpg", 
+        "/img/yelu/23.gif", 
+        "/img/yelu/24.jpg", 
+        "/img/yelu/25.jpg", 
+        "/img/yelu/26.jpg", 
+        "/img/yelu/27.jpg", 
+        "/img/yelu/28.jpg", 
+        "/img/yelu/29.jpg", 
+        "/img/yelu/30.jpg", 
+        "/img/yelu/31.jpg", 
+        "/img/yelu/32.jpg", 
+        "/img/yelu/33.jpg", 
+        "/img/yelu/34.jpg", 
+        "/img/yelu/35.jpg", 
+        "/img/yelu/36.jpg", 
+        "/img/yelu/37.jpg", 
+        "/img/yelu/38.jpg", 
+        "/img/yelu/39.jpg", 
+        "/img/yelu/40.jpg",
+        "/img/yelu/41.gif"
     ];
 
     // 随机抽取逻辑
