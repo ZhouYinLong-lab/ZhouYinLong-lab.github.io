@@ -28,54 +28,81 @@ const emotionLabel = document.getElementById('emotion-label');
 analyzeBtn.addEventListener('click', async () => {
     const text = textInput.value.trim();
     if (!text) {
+        statusMsg.style.color = "#666";
         statusMsg.textContent = "请先输入一点内容哦！";
         return;
     }
 
+    // 每次点击重置文字颜色和状态
+    statusMsg.style.color = "#666";
     statusMsg.textContent = "夜鹭正在跨海求签...";
     analyzeBtn.disabled = true;
 
     try {
-        // 请求我们在 Vercel 部署好的后端接口
-        // 如果你是在本地 Live Server 测试，可能需要写成绝对路径，比如 'http://localhost:3000/api/analyze' (取决于你的本地环境)
-        // 部署上线后，使用相对路径 '/api/analyze' 是最稳妥的
-        const response = await fetch('/api/analyze', {
+        let response = await fetch('/api/analyze', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text })
         });
-
-        // 拦截 HTTP 状态码错误 (比如 503 冷启动报错)
-        if (!response.ok) {
-            const errData = await response.json();
-            statusMsg.textContent = errData.error || "请求出现错误";
-            return;
+        
+        // 【关键防御】如果 Vercel 根本没有部署 api 文件夹，它会返回一个 HTML 的 404 页面
+        // 这里提前拦截，防止后面的 JSON 解析直接崩溃
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+             throw new Error("后端接口不存在 (404)！Vercel 没有正确部署 api 文件夹。");
         }
 
-        const data = await response.json();
+        let data = await response.json();
+
+        // 自动重试逻辑：处理模型冷启动
+        if (data.error === 'cold_start') {
+            let waitTime = Math.ceil(data.estimated_time);
+            
+            // 倒计时循环
+            for (let i = waitTime; i > 0; i--) {
+                statusMsg.textContent = `夜鹭还在云端睡觉，强行唤醒中... 请稍等 ${i} 秒`;
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+
+            statusMsg.textContent = "夜鹭醒了，正在光速识别...";
+            
+            // 倒计时结束后，自动发起第二次请求
+            response = await fetch('/api/analyze', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text })
+            });
+            data = await response.json();
+        }
+
+        // 如果重试后，或第一次请求本身就携带了确切的 error 报错信息
+        if (data.error && data.error !== 'cold_start') {
+             throw new Error(data.error); 
+        }
+
         const topEmotion = data.label;
 
         // 随机出图逻辑
         const imagesArray = heronImages[topEmotion] || heronImages['default'];
         const imagePath = `images/${imagesArray[Math.floor(Math.random() * imagesArray.length)]}`;
 
+        statusMsg.style.color = "#4a90e2"; // 成功后变成蓝色
         statusMsg.textContent = "识别成功！";
         emotionLabel.textContent = `心情: ${topEmotion}`;
         
-        // =========================================
         // 触发 Q弹 动画逻辑
-        // =========================================
         heronImg.style.display = 'inline-block';
         heronImg.src = imagePath;
         
-        // 移除动画类名 -> 强制重排 -> 重新添加动画类名，确保每次点击都弹跳
         heronImg.classList.remove('animate-pop');
-        void heronImg.offsetWidth; 
+        void heronImg.offsetWidth; // 触发浏览器重排
         heronImg.classList.add('animate-pop');
 
     } catch (error) {
-        console.error("Fetch error:", error);
-        statusMsg.textContent = "网络连接失败，请检查网络。";
+        // 【核心修改】将真实的报错信息直接变成红色显示在屏幕上！
+        console.error("详细错误信息:", error);
+        statusMsg.style.color = "red";
+        statusMsg.textContent = `🚨 报错啦: ${error.message}`;
     } finally {
         analyzeBtn.disabled = false;
     }
