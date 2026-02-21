@@ -102,3 +102,12 @@ html, body, #web_container {
   animation: none !important; 
 }
 
+/* ==========================================
+   自定义主题样式覆盖区
+   ========================================== */
+
+/* 修改侧边栏公告板（随机夜鹭）的图标颜色，保留摇摆动画 */
+.card-widget.card-announcement .item-headline i {
+    /* 👇 只要修改下面这个颜色值即可 👇 */
+    color: #317ca1 !important; 
+}

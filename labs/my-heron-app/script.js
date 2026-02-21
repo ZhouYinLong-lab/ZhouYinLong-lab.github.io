@@ -39,7 +39,7 @@ analyzeBtn.addEventListener('click', async () => {
     analyzeBtn.disabled = true;
 
     try {
-        let response = await fetch('/api/analyze', {
+        let response = await fetch('https://my-blog-pearl-two.vercel.app/api/analyze', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text })
