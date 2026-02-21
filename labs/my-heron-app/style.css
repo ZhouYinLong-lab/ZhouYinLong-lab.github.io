@@ -96,7 +96,6 @@ button:disabled {
     max-height: 300px;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    /* 确保图片缩放原点在中心 */
     transform-origin: center; 
 }
 
@@ -126,7 +125,6 @@ button:disabled {
     }
 }
 
-/* 通过 JS 动态添加此类名来触发动画 */
 .animate-pop {
     animation: jellyPop 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
