@@ -104,6 +104,19 @@ analyzeBtn.addEventListener('click', async () => {
         statusMsg.style.color = "red";
         statusMsg.textContent = `🚨 报错啦: ${error.message}`;
     } finally {
-        analyzeBtn.disabled = false;
+        // --- 替换原本直接恢复按钮的代码，加入 3秒 冷却机制 ---
+        let cooldown = 3;
+        analyzeBtn.textContent = `让夜鹭喘口气 (${cooldown}s)`;
+        
+        const timer = setInterval(() => {
+            cooldown--;
+            if (cooldown <= 0) {
+                clearInterval(timer);
+                analyzeBtn.disabled = false;
+                analyzeBtn.textContent = "召唤夜鹭！";
+            } else {
+                analyzeBtn.textContent = `让夜鹭喘口气 (${cooldown}s)`;
+            }
+        }, 1000);
+        // ----------------------------------------------------
     }
-});
